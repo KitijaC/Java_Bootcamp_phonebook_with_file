@@ -30,6 +30,7 @@ public class Main {
                     break;
                 case "2":
                     // see contact list
+                    this.phonebookController.displayAllContacts();
                     break;
                 case "3":
                     // find contact
