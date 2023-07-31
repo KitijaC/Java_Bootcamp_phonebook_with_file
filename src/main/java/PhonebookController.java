@@ -1,18 +1,20 @@
+import exceptions.ContactCreationCancelledException;
+
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class PhonebookController {
-
+private final ContactRepository contactRepository = new ContactRepository();
 
     public void collectAndAddContact(){
         try {
-            Contact contact = collectContactInfo();
-            System.out.println(contact);
+            this.contactRepository.addToContactsFile(collectContactInfo());
         } catch (Exception exception) {
             JOptionPane.showMessageDialog(null, exception.getMessage());
         }
     }
 
-    private Contact collectContactInfo() throws Exception {
+    private Contact collectContactInfo() throws ContactCreationCancelledException {
         Contact contact = new Contact();
         // collect info here
         contact.setFirstName(this.getUserInput("Enter the first name"));
@@ -26,9 +28,9 @@ public class PhonebookController {
             int userChoice = JOptionPane.showConfirmDialog(null, "Contact is missing name or phone number, " +
                     "do you want to start again?");
             if (userChoice == JOptionPane.YES_OPTION) {
-                this.collectAndAddContact();
+                return this.collectContactInfo();
             }
-            //throw new Exception("Contact creation failed");
+            throw new ContactCreationCancelledException("Contact creation failed");
         };
         return contact;
     }
@@ -38,8 +40,29 @@ public class PhonebookController {
     }
 
     public void displayAllContacts(){
+        StringBuilder message = new StringBuilder();
+        ArrayList<Contact> contacts = this.contactRepository.getContacts();
 
-    }public void findContact(){
+        message.append("Name\t" + "Phone\t" + "Email\n");
+
+        if(contacts.isEmpty()) {
+            message.append("No contacts to display");
+        } else {
+            for (Contact contact: contacts){
+                message.append(contact.getFirstName() + " " + contact.getLastName()).append("\t")
+                        .append(contact.getPhoneNumber()).append("\t")
+                        .append(contact.getEmail()).append("\n");
+            }
+        }
+
+        this.displayMessage(message.toString());
+    }
+
+    private void displayMessage(String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
+
+    public void findContact(){
 
     }public void removeContact(){
 
