@@ -63,10 +63,10 @@ public class Contact {
     @Override
     public String toString(){
         return new StringBuilder()
-                .append( id + ",")
-                .append( firstName + ",")
-                .append( lastName + ",")
-                .append( phoneNumber + ",")
+                .append( id + ", ")
+                .append( firstName + ", ")
+                .append( lastName + ", ")
+                .append( phoneNumber + ", ")
                 .append( email + "\n")
                 .toString();
     }

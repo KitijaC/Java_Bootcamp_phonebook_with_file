@@ -5,12 +5,25 @@ import java.util.ArrayList;
 
 public class PhonebookController {
 private final ContactRepository contactRepository = new ContactRepository();
+    ArrayList<Contact> contacts = new ArrayList<>();
 
+    public PhonebookController() {
+        this.reloadContacts();
+    }
     public void collectAndAddContact(){
         try {
             this.contactRepository.addToContactsFile(collectContactInfo());
+            this.reloadContacts();
         } catch (Exception exception) {
             JOptionPane.showMessageDialog(null, exception.getMessage());
+        }
+    }
+
+    private void reloadContacts() {
+        try {
+            this.contacts = this.contactRepository.getContacts();
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -22,8 +35,8 @@ private final ContactRepository contactRepository = new ContactRepository();
         contact.setPhoneNumber(this.getUserInput("Enter the phone number"));
         contact.setEmail(this.getUserInput("Enter the Email (Press enter to skip)"));
         if (
-                contact.getFirstName() == null || contact.getPhoneNumber() == null ||
-                contact.getFirstName().isBlank() || contact.getPhoneNumber().isBlank()
+                contact.getFirstName() == null || contact.getPhoneNumber() == null || contact.getLastName() == null ||
+                contact.getFirstName().isBlank() || contact.getPhoneNumber().isBlank() || contact.getLastName().isBlank()
         ) {
             int userChoice = JOptionPane.showConfirmDialog(null, "Contact is missing name or phone number, " +
                     "do you want to start again?");
@@ -41,20 +54,22 @@ private final ContactRepository contactRepository = new ContactRepository();
 
     public void displayAllContacts(){
         StringBuilder message = new StringBuilder();
-        ArrayList<Contact> contacts = this.contactRepository.getContacts();
 
-        message.append("Name\t" + "Phone\t" + "Email\n");
+        try {
+            message.append("Name\t" + "Phone\t" + "Email\n");
 
-        if(contacts.isEmpty()) {
-            message.append("No contacts to display");
-        } else {
-            for (Contact contact: contacts){
-                message.append(contact.getFirstName() + " " + contact.getLastName()).append("\t")
-                        .append(contact.getPhoneNumber()).append("\t")
-                        .append(contact.getEmail()).append("\n");
+            if(this.contacts.isEmpty()) {
+                message.append("No contacts to display");
+            } else {
+                for (Contact contact: this.contacts){
+                    message.append(contact.getFirstName() + " " + contact.getLastName()).append("\t")
+                            .append(contact.getPhoneNumber()).append("\t")
+                            .append(contact.getEmail()).append("\n");
+                }
             }
+        } catch (Exception exception) {
+            message.append(exception.getMessage());
         }
-
         this.displayMessage(message.toString());
     }
 
@@ -63,8 +78,44 @@ private final ContactRepository contactRepository = new ContactRepository();
     }
 
     public void findContact(){
+        String contactNameToFind = this.getUserInput("Enter the name or number to find");
 
-    }public void removeContact(){
+        ArrayList<Contact> foundContacts = new ArrayList<>();
+
+        for (Contact currentContact: this.contacts){
+            if (this.contactMatches(currentContact, contactNameToFind)) {
+                foundContacts.add(currentContact);
+            }
+        }
+        System.out.println(foundContacts);
+    }
+
+    private boolean contactMatches(Contact currentContact, String contactNameToFind) {
+        // "zino" contains "zi" or "adidi" contains "zi"
+        // "zino adidi" contains "zi"
+
+        /* simplified version of the code below:
+        String cleanedContact = currentContact.toString().trim().toLowerCase();
+        cleanedContact = cleanedContact.replace(",", "")
+        * if(cleanedContact.contain(contactNameToFind.trim().toLowerCase())){
+            return true
+        } else {
+            return false;
+        }
+        * */
+        return currentContact
+                .toString() // e9a9ebd1-f55e-4c46-bf76-a28663aef610, dddd, sssss, 22546468, dddd@mail.com
+                .toLowerCase() // convert all letters to small letters
+                .trim() // remove all spaces
+                .replace(",", "") // remove comma
+                .contains( // we check if this cleaned value contains what user typed
+                        contactNameToFind
+                                .trim()
+                                .toLowerCase()
+                );
+    }
+
+    public void removeContact(){
 
     }
 }

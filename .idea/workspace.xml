@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f84bf52-2ecd-47b7-879c-6588d49dd29c" name="Changes" comment="Phonebook with files in progress part 2 - updated" />
+    <list default="true" id="9f84bf52-2ecd-47b7-879c-6588d49dd29c" name="Changes" comment="Phonebook with files in progress part 2 - updated">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contacts.csv" beforeDir="false" afterPath="$PROJECT_DIR$/contacts.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Contact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Contact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ContactRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ContactRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/PhonebookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PhonebookController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,7 +69,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1690818015081</updated>
-      <workItem from="1690818016425" duration="8675000" />
+      <workItem from="1690818016425" duration="18894000" />
     </task>
     <task id="LOCAL-00001" summary="Phonebook with files in progress">
       <created>1690822722328</created>
@@ -85,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690828261476</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Phonebook with files in progress part 2 - updated">
+      <created>1690828362554</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1690828362554</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

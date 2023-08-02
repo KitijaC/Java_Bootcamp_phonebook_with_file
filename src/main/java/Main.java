@@ -19,6 +19,7 @@ public class Main {
                             .append("\n2. See Contact List")
                             .append("\n3. Find Contact")
                             .append("\n4. Remove Contact")
+                            // add update contact
                             .append("\n5. Exit")
                             .toString()
             );
@@ -34,6 +35,7 @@ public class Main {
                     break;
                 case "3":
                     // find contact
+                    this.phonebookController.findContact();
                     break;
                 case "4":
                     // remove contact
