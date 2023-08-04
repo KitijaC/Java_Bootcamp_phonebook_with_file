@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class ContactRepository {
 
@@ -57,5 +58,15 @@ public class ContactRepository {
             contact.setEmail(singleContactDetailAsArray[4]);
         }
         return contact;
+    }
+
+
+    public void overwriteContactsFile(ArrayList<Contact> contacts) throws Exception{
+        // open the file and replace the content with the string version of contacts in the array
+        String allContactsAsString = contacts.stream().map(Contact::toString).collect(Collectors.joining(""));
+
+        FileWriter contactsFile = new FileWriter(this.contactFileName, false);
+        contactsFile.write(allContactsAsString.toString());
+        contactsFile.close();
     }
 }

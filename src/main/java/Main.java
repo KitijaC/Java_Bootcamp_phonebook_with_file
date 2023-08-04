@@ -11,7 +11,7 @@ public class Main {
     void start() {
         String userChoice = "";
 
-        while(!userChoice.equals("5")) {
+        while(!userChoice.equals("6")) {
             userChoice = JOptionPane.showInputDialog(
                     new StringBuilder()
                             .append("Welcome to Phonebook, please choose an option")
@@ -19,8 +19,8 @@ public class Main {
                             .append("\n2. See Contact List")
                             .append("\n3. Find Contact")
                             .append("\n4. Remove Contact")
-                            // add update contact
-                            .append("\n5. Exit")
+                            .append("\n5. Update Contact")
+                            .append("\n6. Exit")
                             .toString()
             );
 
@@ -39,6 +39,11 @@ public class Main {
                     break;
                 case "4":
                     // remove contact
+                    this.phonebookController.removeContact();
+                    break;
+                case "5":
+                    // update contact
+                    this.phonebookController.updateContact();
                     break;
             }
         }
